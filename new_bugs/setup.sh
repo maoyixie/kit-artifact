@@ -10,8 +10,10 @@ KERNEL_DIR=$MAIN_HOME/testsuite/kernel-memory-acccess-tracing/kernel/5.13/
 # Build and instrument kernel
 cp $CUR_DIR/.config $KERNEL_DIR/
 pushd $KERNEL_DIR/ > /dev/null
-make CC=$CC_MT/bin/gcc olddefconfig
-make CC=$CC_MT/bin/gcc -j`nproc`
+# Newer host compilers can trigger warnings that are treated as errors in host tools (notably objtool/libsubcmd).
+# Disable "warnings as errors" for host tools via WERROR=0 to keep the build going on modern distros.
+make CC=$CC_MT/bin/gcc WERROR=0 olddefconfig
+make CC=$CC_MT/bin/gcc WERROR=0 -j`nproc`
 mkdir -p $AE_NEWBUGS_KERNEL_DIR
 cp $KERNEL_DIR/arch/x86/boot/bzImage $AE_NEWBUGS_KERNEL_DIR
 
