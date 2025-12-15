@@ -1,4 +1,4 @@
 [submodule "kit"]
 	path = kit
-	url = git@github.com:rssys/kit.git
+	url = git@github.com:maoyixie/kit.git
 	branch = main
