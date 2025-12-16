@@ -20,7 +20,8 @@ cp $KERNEL_DIR/arch/x86/boot/bzImage $AE_NEWBUGS_KERNEL_DIR
 # Build image
 mkdir -p $AE_NEWBUGS_IMAGE_DIR
 pushd $AE_NEWBUGS_IMAGE_DIR/ > /dev/null
-$MAIN_HOME/testsuite/image/create-image.sh
+$MAIN_HOME/testsuite/image/create-image.sh -d ${AE_DEBIAN_RELEASE}
+popd > /dev/null
 
 # Download test programs
 mkdir -p $AE_NEWBUGS_PROG_DIR
@@ -28,3 +29,4 @@ pushd $AE_NEWBUGS_WORKDIR/ > /dev/null
 wget https://www.cs.purdue.edu/homes/liu3101/kit/ae_newbugs_progs.tar.xz
 tar -xf ae_newbugs_progs.tar.xz -C $AE_NEWBUGS_PROG_DIR --strip-components 2
 rm ae_newbugs_progs.tar.xz
+popd > /dev/null
